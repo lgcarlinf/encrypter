@@ -1,4 +1,4 @@
-# encrypter
+# Encrypter
 
 -Link:
 [Encrypter Alura](https://encrypteralura.netlify.app/)
