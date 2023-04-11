@@ -43,7 +43,6 @@ body {
 
 .input-text {
   width: 90%;
-  /*   height: 250px; */
   font-size: 2rem;
   border: none;
   background-color: transparent;
@@ -238,7 +237,6 @@ body {
     box-shadow: none;
   }
 
-  /*Test*/
   .container-right_info {
     flex-direction: column;
     align-items: center;
