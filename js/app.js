@@ -6,68 +6,63 @@ const resultDiv = document.querySelector("#result");
 const p = document.querySelector("#parrafo");
 const clipboard = document.querySelector("#clipboard");
 
-const text = () => {
-  const arr = texto.value.toLowerCase().split("");
-  const arrEncrypt = arr.map((l) => encrypt(l));
-  const result = arrEncrypt.join("");
-  if (result) {
-    resultDiv.classList.remove("visible");
-    containerRight.classList.add("visible");
-    p.innerHTML = result;
+const handleEncrypt = () => {
+  const inputText = texto.value.toLowerCase();
+  const encryptedText = encryptText(inputText);
+  if (encryptedText) {
+    displayResult(encryptedText);
   }
-
   resetForm();
 };
 
-const encrypt = (l) => {
-  if (l == "a") {
-    return (l = "ai");
-  } else if (l == "e") {
-    return (l = "enter");
-  } else if (l == "i") {
-    return (l = "imes");
-  } else if (l == "o") {
-    return (l = "ober");
-  } else if (l == "u") {
-    return (l = "ufat");
-  } else {
-    return l;
+const encryptChar = (char) => {
+  switch (char) {
+    case 'a': return 'ai';
+    case 'e': return 'enter';
+    case 'i': return 'imes';
+    case 'o': return 'ober';
+    case 'u': return 'ufat';
+    default: return char;
   }
 };
 
-const decrypt = () => {
-  const regexA = /ai/gi;
-  const regexE = /enter/gi;
-  const regexI = /imes/gi;
-  const regexO = /ober/gi;
-  const regexU = /ufat/gi;
+const encryptText = (text) => {
+  return text.split('').map(encryptChar).join('');
+};
 
-  const decrypt = texto.value
-    .toLowerCase()
-    .replace(regexA, "a")
-    .replace(regexE, "e")
-    .replace(regexI, "i")
-    .replace(regexO, "o")
-    .replace(regexU, "u");
-
-  if (decrypt) {
-    resultDiv.classList.remove("visible");
-    containerRight.classList.add("visible");
-    p.innerHTML = decrypt;
+const handleDecrypt = () => {
+  const inputText = texto.value.toLowerCase();
+  const decryptedText = decryptText(inputText);
+  if (decryptedText) {
+    displayResult(decryptedText);
   }
-
   resetForm();
+};
+
+const decryptText = (text) => {
+  return text
+    .replace(/ai/gi, 'a')
+    .replace(/enter/gi, 'e')
+    .replace(/imes/gi, 'i')
+    .replace(/ober/gi, 'o')
+    .replace(/ufat/gi, 'u');
+};
+
+const displayResult = (result) => {
+  resultDiv.classList.remove("visible");
+  containerRight.classList.add("visible");
+  p.innerHTML = result;
 };
 
 const resetForm = () => {
   texto.value = "";
 };
 
-const clipBoard = async () => {
-  let parrafo = document.querySelector("#parrafo").innerHTML;
-  await navigator.clipboard.writeText(parrafo);
+const handleClipboard = async () => {
+  const parrafoText = p.innerHTML;
+  await navigator.clipboard.writeText(parrafoText);
 };
 
-submit.addEventListener("click", text);
-decryptBtn.addEventListener("click", decrypt);
-clipboard.addEventListener("click", clipBoard);
+submit.addEventListener("click", handleEncrypt);
+decryptBtn.addEventListener("click", handleDecrypt);
+clipboard.addEventListener("click", handleClipboard);
