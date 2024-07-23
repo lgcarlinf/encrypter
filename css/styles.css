@@ -48,6 +48,7 @@ body {
   background-color: transparent;
   color: #0a3871;
   margin-top: 50px;
+  resize: none;
 }
 
 .input-text:focus {
@@ -74,6 +75,12 @@ body {
   margin-bottom: 20px;
 }
 
+.info img{
+  width: 16px;
+  height: 16px;
+  aspect-ratio: 1;
+}
+
 .info span {
   color: #495057;
   font-size: 12px;
@@ -87,6 +94,8 @@ body {
 }
 
 .btn {
+  font-size: 14px;
+  font-weight: bold;
   margin: 10px 0;
   padding: 15px 20px;
   border-radius: 20px;
@@ -117,6 +126,9 @@ body {
 }
 
 .msg {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding: 20px;
   width: 90%;
   margin: 20px 0;
@@ -131,11 +143,13 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: #343a40;
+  margin: 0 ;
 }
 
 .msg p {
   color: #495057;
   font-size: 16px;
+  margin: 0 ;
 }
 
 .container-right_info {
@@ -155,6 +169,10 @@ body {
   box-shadow: 0px 24px 32px -8px rgba(0, 0, 0, 0.08);
 }
 
+.result button{
+  width: 100%;
+}
+
 .result p {
   text-align: center;
   padding-bottom: 15px;
@@ -167,8 +185,6 @@ body {
 
 /* MEDIA QUERYS */
 @media (min-width: 500px) {
-  .container-btn {
-  }
 
   .btns {
     width: 100%;
@@ -212,7 +228,7 @@ body {
   }
 
   .container-right {
-    min-width: 250px;
+    min-width: 300px;
     flex-shrink: 3;
     height: 100%;
     justify-content: center;
@@ -222,18 +238,12 @@ body {
     margin-right: 20px;
   }
 
-  .container-right img {
-    display: block;
-  }
-
   .container-btn {
     margin-bottom: 35px;
   }
 
   .msg {
-    background: none;
-    border: none;
-    margin: 20px;
+    margin: 0;
     box-shadow: none;
   }
 
@@ -243,7 +253,10 @@ body {
   }
 
   .container-right_info img {
+    display: block;
     width: 90%;
+    aspect-ratio: 1;
+    object-fit: contain;
   }
 
   .result {
@@ -261,4 +274,44 @@ body {
   .visible {
     display: none;
   }
+}
+
+.container-tooltip{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.tooltip {
+  font-size: 13px;
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -50px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.tooltip.show {
+  visibility: visible;
+  opacity: 1;
 }

@@ -3,7 +3,7 @@ const submit = document.querySelector("#submit");
 const decryptBtn = document.querySelector("#decrypt");
 const containerRight = document.querySelector("#container-right_info");
 const resultDiv = document.querySelector("#result");
-const p = document.querySelector("#parrafo");
+const paragraph = document.querySelector("#parrafo");
 const clipboard = document.querySelector("#clipboard");
 
 const handleEncrypt = () => {
@@ -51,7 +51,7 @@ const decryptText = (text) => {
 const displayResult = (result) => {
   resultDiv.classList.remove("visible");
   containerRight.classList.add("visible");
-  p.innerHTML = result;
+  paragraph.innerHTML = result;
 };
 
 const resetForm = () => {
@@ -59,8 +59,19 @@ const resetForm = () => {
 };
 
 const handleClipboard = async () => {
-  const parrafoText = p.innerHTML;
-  await navigator.clipboard.writeText(parrafoText);
+  const paragraphText = paragraph.innerHTML;
+  await navigator.clipboard.writeText(paragraphText);
+  handleTooltop();
+};
+
+const handleTooltop = () => {
+  const tooltip = document.getElementById('tooltip');
+  
+  tooltip.classList.add('show');
+  
+  setTimeout(() => {
+    tooltip.classList.remove('show');
+  }, 1000);
 };
 
 submit.addEventListener("click", handleEncrypt);
